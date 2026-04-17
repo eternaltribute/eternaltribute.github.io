@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brittney Solarte — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FDFAF5; --bg2: #F0EDE6; --card: #FFFFFF;
+      --text: #1A1A2E; --text2: #4A4A6A; --text3: #9090A8;
+      --coral: #FF6B6B; --coral-dim: rgba(255,107,107,0.1);
+      --mint: #0AAFA0; --mint-dim: rgba(10,175,160,0.1);
+      --lav: #7C5CBF; --lav-dim: rgba(124,92,191,0.1);
+      --border: rgba(26,26,46,0.09);
+      --shadow: 0 6px 28px rgba(26,26,46,0.1);
+      --nav-blur: rgba(253,250,245,0.82);
+    }
+    [data-theme="dark"] {
+      --bg: #0D1117; --bg2: #161B22; --card: #1C2128;
+      --text: #E6EDF3; --text2: #8B949E; --text3: #484F58;
+      --coral: #FF8FAB; --coral-dim: rgba(255,143,171,0.12);
+      --mint: #64FFDA; --mint-dim: rgba(100,255,218,0.08);
+      --lav: #C084FC; --lav-dim: rgba(192,132,252,0.1);
+      --border: rgba(240,246,252,0.08);
+      --shadow: 0 6px 28px rgba(0,0,0,0.45);
+      --nav-blur: rgba(13,17,23,0.82);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0.9rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: var(--nav-blur);
+      border-color: var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--coral); }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.88rem; color: var(--text2); text-decoration: none;
+      font-weight: 700; letter-spacing: 0.01em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--coral); }
+    .theme-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--card);
+      cursor: pointer; font-size: 17px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .theme-btn:hover { border-color: var(--coral); transform: scale(1.08); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.18;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+    [data-theme="dark"] .blob { opacity: 0.1; }
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: var(--coral);
+      right: -100px; top: 50%; transform: translateY(-50%);
+      animation: float1 9s infinite;
+    }
+    .blob-2 {
+      width: 350px; height: 350px;
+      background: var(--mint);
+      left: -60px; bottom: 5%;
+      animation: float2 11s infinite;
+    }
+    .blob-3 {
+      width: 250px; height: 250px;
+      background: var(--lav);
+      right: 28%; top: 12%;
+      animation: float3 7s infinite;
+    }
+    @keyframes float1 { from { transform: translateY(-50%) scale(1); } to { transform: translateY(-58%) scale(1.06); } }
+    @keyframes float2 { from { transform: translateY(0); } to { transform: translateY(-25px) scale(1.04); } }
+    @keyframes float3 { from { transform: scale(1) rotate(0deg); } to { transform: scale(1.1) rotate(6deg); } }
+
+    .hero-inner {
+      max-width: 860px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-text { display: flex; flex-direction: column; }
+    .hero-photo-wrap { position: relative; flex-shrink: 0; }
+    .hero-photo-frame {
+      width: 260px; height: 260px;
+      border-radius: 28px; overflow: hidden;
+      border: 3px solid var(--coral);
+      box-shadow: 8px 8px 0px var(--mint);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .hero-photo-frame:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0px var(--mint);
+    }
+    .hero-photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; display: block;
+    }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      background: var(--card);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem; color: var(--text3);
+      font-size: 0.78rem; font-weight: 700; text-align: center; padding: 1rem;
+    }
+    .photo-placeholder .p-icon { font-size: 2.5rem; }
+    .photo-dot {
+      position: absolute; width: 18px; height: 18px;
+      border-radius: 50%; bottom: -6px; right: -6px;
+      background: var(--lav); border: 3px solid var(--bg);
+    }
+    @media (max-width: 640px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: flex; justify-content: center; order: -1; }
+      .hero-photo-frame { width: 160px; height: 160px; border-radius: 20px; box-shadow: 5px 5px 0px var(--mint); }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mint);
+      padding: 0.35rem 0.85rem; border-radius: 50px;
+      border: 1px solid var(--mint); background: var(--mint-dim);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+    }
+    .hero-badge::before { content: ''; display: block; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); animation: pulse 1.5s ease infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    h1.hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.03em; margin-bottom: 0.75rem;
+      opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+    .name-first { color: var(--text); display: block; }
+    .name-last { color: var(--coral); display: block; }
+
+    .hero-role {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.1rem, 3vw, 1.65rem);
+      font-weight: 600; color: var(--text2);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 6px;
+      opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
+    }
+    .cursor {
+      display: inline-block; width: 3px; height: 1.1em;
+      background: var(--coral); border-radius: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-bio {
+      font-size: 1.05rem; color: var(--text2);
+      max-width: 540px; margin-bottom: 2.5rem; line-height: 1.85;
+      opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards;
+    }
+    .hero-bio strong { color: var(--text); font-weight: 700; }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards;
+    }
+    .btn { padding: 0.75rem 1.85rem; border-radius: 50px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s; }
+    .btn-solid { background: var(--coral); color: #fff; border: 2px solid var(--coral); }
+    .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(255,107,107,0.35); }
+    .btn-outline { background: transparent; color: var(--text); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--mint); color: var(--mint); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 5rem 2.5rem; max-width: 860px; margin: 0 auto; }
+    .s-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--mint); margin-bottom: 0.6rem;
+    }
+    .s-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.025em; margin-bottom: 1.5rem;
+    }
+    .s-body { font-size: 1.02rem; color: var(--text2); line-height: 1.85; max-width: 620px; }
+    .s-body strong { color: var(--text); font-weight: 700; }
+
+    /* ── ABOUT CARDS ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .acard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem 1.5rem;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .acard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .acard.full { grid-column: 1 / -1; }
+    .acard-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 1rem;
+    }
+    .ic { background: var(--coral-dim); }
+    .im { background: var(--mint-dim); }
+    .il { background: var(--lav-dim); }
+    .acard-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.0rem; font-weight: 700; margin-bottom: 0.45rem;
+    }
+    .acard-body { font-size: 0.88rem; color: var(--text2); line-height: 1.7; }
+    .acard-body strong { color: var(--text); font-weight: 700; }
+
+    /* ── CHIPS ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.85rem; }
+    .chip {
+      padding: 0.28rem 0.8rem; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700; border: 1px solid;
+    }
+    .cc { background: var(--coral-dim); color: var(--coral); border-color: var(--coral); }
+    .cm { background: var(--mint-dim); color: var(--mint); border-color: var(--mint); }
+    .cl { background: var(--lav-dim); color: var(--lav); border-color: var(--lav); }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .hl {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .hl-num {
+      font-family: 'Syne', sans-serif; font-size: 1.9rem;
+      font-weight: 800; color: var(--coral); line-height: 1; margin-bottom: 0.3rem;
+    }
+    .hl-lbl { font-size: 0.73rem; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--border); max-width: 860px; margin: 0 auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2.5rem;
+      font-size: 0.84rem; color: var(--text3);
+      border-top: 1px solid var(--border);
+      font-family: 'Nunito', sans-serif;
+    }
+    footer a { color: var(--coral); text-decoration: none; font-weight: 700; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0.9rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.25rem 3rem; }
+      .section { padding: 3.5rem 1.25rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .acard.full { grid-column: 1; }
+      .highlights { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="#"><span>B</span>ritt<span>.</span>dev</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">☀️</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="hero-inner">
+      <!-- LEFT: text -->
+      <div class="hero-text">
+        <div class="hero-badge">Available for internships</div>
+        <h1 class="hero-name">
+          <span class="name-first">Brittney</span>
+          <span class="name-last">Solarte</span>
+        </h1>
+        <p class="hero-role">
+          <span id="typed"></span><span class="cursor"></span>
+        </p>
+        <p class="hero-bio">
+          Computer Science student at <strong>NJIT</strong> crafting everything from Python tools to Unity games.
+          Dean's List. Bilingual. Always building something new.
+        </p>
+        <div class="hero-cta">
+          <a href="#about" class="btn btn-solid">About me ↓</a>
+          <a href="mailto:brittneysolarte1@gmail.com" class="btn btn-outline">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: photo — replace "your-photo.jpg" with your actual filename -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img src="your-photo.jpg" alt="Brittney Solarte"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="photo-placeholder" style="display:none">
+            <span class="p-icon">📸</span>
+            Add your photo!<br>Rename it to<br><strong>your-photo.jpg</strong>
+          </div>
+        </div>
+        <div class="photo-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <p class="s-label">Who I am</p>
+    <h2 class="s-title">Passionate about code,<br>design, and people.</h2>
+      <p class="s-body">
+        I'm Brittney — a CS student based in Bridgewater, NJ who loves the intersection of
+        <strong>technology and creativity</strong>. Whether I'm building command-line tools,
+        developing 3D games, or setting up networks, I bring technical rigor and genuine
+        enthusiasm to everything I do. Fluent in English and Spanish, I believe great tech
+        is about connecting people just as much as connecting systems.
+      </p>
+
+    <div class="about-grid">
+      <div class="acard">
+        <div class="acard-icon ic">🎓</div>
+        <h3 class="acard-title">Education</h3>
+        <p class="acard-body">B.S. Computer Science at <strong>NJIT</strong> — Ying Wu College of Computing. Dean's List 2024. Graduating May 2027. Previously earned A.S. in Science & Math from RVCC.</p>
+      </div>
+      <div class="acard">
+        <div class="acard-icon im">🌎</div>
+        <h3 class="acard-title">Languages</h3>
+        <p class="acard-body">Native English speaker, fluent in <strong>Spanish</strong>. Bilingual communication bridges diverse teams, clients, and communities in every role I've held.</p>
+      </div>
+      <div class="acard">
+        <div class="acard-icon il">🎮</div>
+        <h3 class="acard-title">Currently Building</h3>
+        <p class="acard-body">A 3D bubble shooter game in <strong>Unity + C#</strong>, Python productivity tools, a home network lab with TP-Link, and yes — this very portfolio.</p>
+      </div>
+      <div class="acard">
+        <div class="acard-icon ic">🔭</div>
+        <h3 class="acard-title">Looking For</h3>
+        <p class="acard-body">IT or Software Development <strong>internship opportunities</strong> where I can apply real-world skills, keep learning fast, and make a meaningful contribution.</p>
+      </div>
+      <div class="acard full">
+        <div class="acard-icon im">⚡</div>
+        <h3 class="acard-title">Technical Skills</h3>
+        <div class="chips">
+          <span class="chip cc">Java</span>
+          <span class="chip cc">Python</span>
+          <span class="chip cc">C++</span>
+          <span class="chip cc">C#</span>
+          <span class="chip cc">HTML / CSS</span>
+          <span class="chip cc">Assembly</span>
+          <span class="chip cm">Unity</span>
+          <span class="chip cm">Git</span>
+          <span class="chip cm">GitHub</span>
+          <span class="chip cm">Data Structures</span>
+          <span class="chip cl">Windows</span>
+          <span class="chip cl">macOS</span>
+          <span class="chip cl">Microsoft Office</span>
+          <span class="chip cl">Google Suite</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlights">
+      <div class="hl"><div class="hl-num">3.8+</div><div class="hl-lbl">GPA · Dean's List</div></div>
+      <div class="hl"><div class="hl-num">2</div><div class="hl-lbl">Projects Built</div></div>
+      <div class="hl"><div class="hl-num">2</div><div class="hl-lbl">Languages Spoken</div></div>
+      <div class="hl"><div class="hl-num">May '27</div><div class="hl-lbl">Graduation</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PLACEHOLDER FOR FUTURE SECTIONS -->
+  <section class="section" id="projects" style="text-align:center; padding: 4rem 2.5rem;">
+    <p class="s-label">Coming soon</p>
+    <h2 class="s-title" style="margin-bottom: 1rem;">Projects section</h2>
+    <p class="s-body" style="margin: 0 auto; text-align: center;">Bubble Pop!, Python To-Do App, Home Network Lab & more — coming next!</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact">
+    <p style="margin-bottom: 0.5rem; font-size: 1rem; color: var(--text2); font-weight: 600;">Let's connect! 👋</p>
+    <p>
+      <a href="mailto:brittneysolarte1@gmail.com">brittneysolarte1@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/brittsolarte" target="_blank" rel="noopener">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p style="margin-top: 1rem;">Built with HTML, CSS & love by Brittney Solarte</p>
+  </footer>
+
+  <script>
+    /* theme toggle */
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    function toggleTheme() {
+      const dark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', dark ? 'light' : 'dark');
+      themeBtn.textContent = dark ? '🌙' : '☀️';
+    }
+
+    /* nav scroll */
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    /* typewriter */
+    const roles = ['CS Student & Builder', 'Python Developer', 'Unity Game Dev', 'Bilingual Coder', 'Future IT Pro'];
+    let ri = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typed');
+    function type() {
+      const word = roles[ri];
+      if (!deleting) {
+        el.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; setTimeout(type, 1900); return; }
+      } else {
+        el.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+      }
+      setTimeout(type, deleting ? 50 : 85);
+    }
+    setTimeout(type, 900);
+  </script>
+</body>
+</html>
