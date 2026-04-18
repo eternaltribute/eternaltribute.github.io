@@ -124,8 +124,10 @@
     }
     .hero-text { display: flex; flex-direction: column; }
     .hero-photo-wrap { position: relative; flex-shrink: 0; }
+
+    /* ── FIX 1: Portrait 3:4 ratio (was 260x260) ── */
     .hero-photo-frame {
-      width: 260px; height: 260px;
+      width: 240px; height: 320px;
       border-radius: 28px; overflow: hidden;
       border: 3px solid var(--coral);
       box-shadow: 8px 8px 0px var(--mint);
@@ -153,18 +155,15 @@
       border-radius: 50%; bottom: -6px; right: -6px;
       background: var(--lav); border: 3px solid var(--bg);
     }
-    @media (max-width: 640px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-wrap { display: flex; justify-content: center; order: -1; }
-      .hero-photo-frame { width: 160px; height: 160px; border-radius: 20px; box-shadow: 5px 5px 0px var(--mint); }
-    }
+
+    /* ── FIX 2: Badge hugs its text ── */
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--mint);
       padding: 0.35rem 0.85rem; border-radius: 50px;
       border: 1px solid var(--mint); background: var(--mint-dim);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.5rem; width: fit-content;
       opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
     }
     .hero-badge::before { content: ''; display: block; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); animation: pulse 1.5s ease infinite; }
@@ -305,6 +304,10 @@
       .about-grid { grid-template-columns: 1fr; }
       .acard.full { grid-column: 1; }
       .highlights { grid-template-columns: repeat(2, 1fr); }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: flex; justify-content: center; order: -1; }
+      /* FIX 3: Mobile portrait ratio (was 160x160) */
+      .hero-photo-frame { width: 150px; height: 200px; border-radius: 20px; box-shadow: 5px 5px 0px var(--mint); }
     }
   </style>
 </head>
@@ -312,7 +315,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a class="nav-logo" href="#"><span>B</span>ritt<span>S</span>olarte<span>.</span>github.io</a>
+    <a class="nav-logo" href="#"><span>E</span>ternal<span>T</span>ribute<span>.</span>github<span>.</span>io</a>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
@@ -351,14 +354,14 @@
         </div>
       </div>
 
-      <!-- RIGHT: photo — replace "your-photo.jpg" with your actual filename -->
+      <!-- RIGHT: photo — upload IMG_8768.png to same folder as index.html -->
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
-          <img src="your-photo.jpg" alt="Brittney Solarte"
+          <img src="IMG_8768.png" alt="Brittney Solarte"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="photo-placeholder" style="display:none">
             <span class="p-icon">📸</span>
-            Add your photo!<br>Rename it to<br><strong>your-photo.jpg</strong>
+            Add your photo!<br>Rename it to<br><strong>IMG_8768.png</strong>
           </div>
         </div>
         <div class="photo-dot"></div>
@@ -395,7 +398,7 @@
       </div>
       <div class="acard">
         <div class="acard-icon il">🎮</div>
-        <h3 class="acard-title"> Currently Building</h3>
+        <h3 class="acard-title">Currently Building</h3>
         <p class="acard-body">A 3D bubble shooter game in <strong>Unity + C#</strong>, Python productivity tools, a home network lab with TP-Link, and yes — this very portfolio.</p>
       </div>
       <div class="acard">
